@@ -674,7 +674,7 @@ np.savetxt('dataz.txt', Z, delimiter = ',' )
 np.savetxt('datat.txt', T, delimiter = ',' )
 np.savetxt('datal.txt', L, delimiter = ',' )
 
-
+print('git 2')
 
 
 
