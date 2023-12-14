@@ -78,23 +78,23 @@ def accel(velocity, reaction, speed_diff, position_diff,max_speed):
 
 carB = Car(1,400,100,20 , 0, 16.5, 0.1, 'red', 30, 1.5, 0.5,2)
 carBLOCK1 = Car(1,400,1000,0.1 , 0, 500, 0, 'red', 0.11, 1.5, 100,3)
-carBLOCK2 = Car(2,400,1000,0.1 , 0, 250, 0, 'red', 0.11, 1.5, 100,3)
-cars = [carB, carBLOCK1,carBLOCK2]
+#carBLOCK2 = Car(2,400,1000,0.1 , 0, 250, 0, 'red', 0.11, 1.5, 100,3)
+cars = [carB, carBLOCK1]#,carBLOCK2]
 road1 = Road(3, 21, 397)
 
 #car generator - generates one car and appends onto the end of cars
 
-def car_generate(cars):
+def car_generate(cars): #generates a sinlge car and appends the new car to the list called cars
     # length
-    lengths = [4.4, 5.2, 12, 16.5]
-    length_weights = [0.600601991, 0.243111831, 0.069460523, 0.086825654] #scaled
+    lengths = [4.4, 5.2, 12, 16.5] #car, van, rigid hgv, articulated hgv
+    length_weights = [0.600601991, 0.243111831, 0.069460523, 0.086825654] #probability of these vehicles bein generated
     length = np.random.choice(lengths, p = length_weights)
 
     #politeness
-    mean_politeness = 0.8
+    mean_politeness = 0.2
     std_politeness = 0.05
     min_politeness = 0.05
-    max_politeness = 1
+    max_politeness = 0.3
     politeness = np.random.normal(mean_politeness,std_politeness)
     if politeness > max_politeness:
         politeness = max_politeness
@@ -102,50 +102,50 @@ def car_generate(cars):
         politeness = min_politeness
 
     #speed - SOURCE AVERAGE TRAFFIC SPEEDS GOV
-    #car
+    #car - ~normally distributed
     std_speed_des_car = 3.76
     max_speed_des_car = 40.23
     min_speed_des_car = 20.12
     mean_speed_des_car = 30.39
 
-    #van- need to work out standard devaition
+    #van - ~normally distributed
     std_speed_des_van = 3.89
     max_speed_des_van = 40.23
     min_speed_des_van = 20.12
     mean_speed_des_van = 30.99
 
-    #rigid hgv
+    #rigid hgv - ~half-normal distribution - to fix to make continuous in future update
     rigid_speeds = [20.11622709, 23.4689316, 25.70406795, 27.93920429, 30.17434063, 32.40947698, 34.64461332, 37.99731784]
     rigid_weights = [0.05, 0.2, 0.27, 0.16, 0.17, 0.1, 0.035, 0.015]
     max_speed_des_rigid = 37.99
     min_speed_des_rigid = 20.12
 
-    #articulated hgv
+    #articulated hgv - ~half-normal distribution - to fix to make continuous in future update
     arctic_speeds = [20.11622709, 23.4689316, 25.70406795, 27.93920429]
     arctic_weights = [0.07, 0.465, 0.455, 0.01]
     max_speed_des_arctic = 27.94
     min_speed_des_arctic = 20.12
 
-    if length == 4.4:
+    if length == 4.4: #i.e if car
         speed = np.random.normal(mean_speed_des_car, std_speed_des_car)
         if speed > max_speed_des_car:
            speed = max_speed_des_car
         elif speed < min_speed_des_car:
            speed = min_speed_des_car
-    elif length == 5.2:
+    elif length == 5.2: #i.e if van
         speed = np.random.normal(mean_speed_des_van, std_speed_des_van)
         if speed > max_speed_des_van:
             speed = max_speed_des_van
         elif speed < min_speed_des_van:
             speed = min_speed_des_van
-    elif length == 12:
+    elif length == 12: #i.e if rigid hgv
         speed = np.random.choice(rigid_speeds, p = rigid_weights)
         if speed > max_speed_des_rigid:
             speed = max_speed_des_rigid
         elif speed < min_speed_des_rigid:
             speed = min_speed_des_rigid
 
-    elif length == 16.5:
+    elif length == 16.5: #i.e if articulated hgv
         speed = np.random.choice(arctic_speeds, p=arctic_weights)
         if speed > max_speed_des_arctic:
             speed = max_speed_des_arctic
@@ -167,7 +167,7 @@ def car_generate(cars):
     colours = ['rosybrown', 'firebrick', 'red', 'salmon', 'chocolate','peru','darkorange','gold','orange','olivedrab','darkolivegreen','lime','green','forestgreen','turquoise','teal','dodgerblue','cadetblue','blueviolet','purple','blue','crimson','royalblue']
     colour = np.random.choice(colours)
 
-    #lane-changing threshold
+    #lane-changing threshold - guessing it is normally distrubted need to do more research on this
     mean_thresh = 0.1
     std_thresh = 0.05
     min_thresh = 0.01
@@ -192,7 +192,7 @@ def car_generate(cars):
     cars.append(globals()['car' + str(car_number)])
 
 #identify functions
-def identify_carFO_for(car):  # returns car O for given car
+def identify_carFO_for(car):  #identifys the old follower of a car
     if car.lane == 1:
         if len(lane1) > 0:
             for c1, car1 in enumerate(lane1):
@@ -245,7 +245,7 @@ def identify_carFO_for(car):  # returns car O for given car
             carO = carEND
             carO.lane = 4
     return carO
-def identify_carLO_for(car):
+def identify_carLO_for(car): #identifys the old leader of a car
     if car.lane == 1:
         if len(lane1_rev) > 0:
             for c1, car1 in enumerate(lane1_rev):
@@ -299,7 +299,7 @@ def identify_carLO_for(car):
     return carlo
 
 
-def identify_carNFL_for(car): #new left lane follower (only works for cars in lane 2 and 3)
+def identify_carNFL_for(car): #identifys new left lane follower (only works for cars in lane 2 and 3)
     if car.lane == 2:
         if len(lane1) > 0:
             for c1, car1 in enumerate(lane1):
@@ -326,7 +326,7 @@ def identify_carNFL_for(car): #new left lane follower (only works for cars in la
             carNFL.lane = 2
     return carNFL
 
-def identify_carNFR_for(car): #new follower right lane (only works for cars in lanes 1 and 2)
+def identify_carNFR_for(car): #identifys new follower right lane (only works for cars in lanes 1 and 2)
     if car.lane == 1:
         if len(lane2) > 0:
             for c2, car2 in enumerate(lane2):
@@ -353,7 +353,7 @@ def identify_carNFR_for(car): #new follower right lane (only works for cars in l
             carNFR.lane = 3
     return carNFR
 
-def identify_carNLL_for(car): #finds new leader in left lane (only works for lanes 2 and 3)
+def identify_carNLL_for(car): #identifys new leader in left lane (only works for lanes 2 and 3)
     if car.lane == 2:
         if len(lane1_rev) > 0:
             for c1, car1 in enumerate(lane1_rev):
@@ -380,7 +380,7 @@ def identify_carNLL_for(car): #finds new leader in left lane (only works for lan
             carNLL.lane = 2
     return carNLL
 
-def identify_carNLR_for(car): #finds new leader in right lane (only works for lane 1 and 2)
+def identify_carNLR_for(car): #identifys new leader in right lane (only works for lane 1 and 2)
     if car.lane == 1:
         if len(lane2_rev) > 0:
             for c2, car2 in enumerate(lane2_rev):
@@ -412,7 +412,7 @@ def del_v(leader,follower):
 def del_s(leader,follower):
     return abs(leader.pos - follower.pos - leader.length)
 
-def lane_change(car, a_th, politeness): #safety criterion for car
+def lane_change(car, a_th, politeness): #identifys the necessary followers and leaders, calculates the necessary MOBIL accelerations and then works out what lane to draw the vehicle in
     #calculate the 6 accelerations
     if car.lane == 1:
         carNLR = identify_carNLR_for(car)
@@ -547,7 +547,7 @@ def sort_lanes(cars): # sorts cars by lane and then pos
         elif car.lane == 4:
             lane4.append(car)
 
-def display_information(variable_name, dynamic_value, unit, information_number):
+def display_information(variable_name, dynamic_value, unit, information_number): #a useful function that can display real time date on the screen
     font = pygame.font.SysFont('Arial', 20)
     speedometer = font.render(str(variable_name) + str(dynamic_value) + str(unit), True, 'white')
     screen.blit(speedometer, (50, 100 + information_number*50 - speedometer.get_height()))
@@ -586,6 +586,7 @@ frame_counter = 0
 for i in range(1,120,1):
     generation_times.append(int(i/car_generation_rate))
 
+#begin main while loop - runs until the red X is clicked in pygame
 run = True
 while run:
     timer.tick(fps)
@@ -633,6 +634,7 @@ while run:
 
         lane_change_criterion = lane_change(car, car.thresh, car.politeness)
 
+        #sorting after
         carspos = sorted(carspos, key=attrgetter('pos'), reverse=True)
         sort_lanes(carspos)
         lane1_rev = lane1[::-1]
@@ -650,7 +652,7 @@ pygame.quit()
 
 #graph plotting
 #saving data
-def time_tick(interval, frames):
+def time_tick(interval, frames): #not necessary anymore now time can be collected from current_time
     for i in range(frames):
         t = i * interval
         time.append(t)
@@ -674,7 +676,7 @@ np.savetxt('dataz.txt', Z, delimiter = ',' )
 np.savetxt('datat.txt', T, delimiter = ',' )
 np.savetxt('datal.txt', L, delimiter = ',' )
 
-print('git 2')
+
 
 
 
