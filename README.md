@@ -29,6 +29,10 @@ Currently the most advanced simulation featuring 3 lanes. This simulation uses s
 
 Each simulation has graphs that can be used to visualise the data exported from them. To do this the simulation code must be in the same folder as the graph code.
 
+## Video of Simulation
+
+You can download and view a video of the siumulation playing by clicking [here](https://github.com/M1lesBaker/Traffic_Project/blob/master/0.5%20cars%20per%20second%20generation%20-%203%20lane%20(9mb).mp4) and then click download raw file.
+
 ## References
 
 [1] Martin Treiber, Ansgar Hennecke, and Dirk Helbing. Congested traffic states in empirical observa-
