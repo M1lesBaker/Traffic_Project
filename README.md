@@ -1,5 +1,9 @@
 # Modelling Motorway Traffic using Microscopic Techniques
 
+
+Uploading 0.5 cars per second generation - 3 lane.mp4…
+
+
 ## Introduction
 This code was developed to implement both the intelligent driver model, IDM [1] and the model, minimizing.
 overall braking induced by lane change (MOBIL) [2] to create a microscopic simulation of
