@@ -31,7 +31,7 @@ Each simulation has graphs that can be used to visualise the data exported from 
 
 ## Video of Simulation
 
-You can download and view a video of the siumulation playing by clicking [here](https://github.com/M1lesBaker/Traffic_Project/blob/master/0.5%20cars%20per%20second%20generation%20-%203%20lane%20(9mb).mp4) and then click download raw file.
+You can download and view a video of the siumulation playing by clicking [here](https://github.com/M1lesBaker/Traffic_Project/blob/master/0.5%20cars%20per%20second%20generation%20-%203%20lane%20(9mb).mp4) and then downloading the raw file.
 
 ## References
 
