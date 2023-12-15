@@ -29,6 +29,10 @@ Currently the most advanced simulation featuring 3 lanes. This simulation uses s
 
 Each simulation has graphs that can be used to visualise the data exported from them. To do this the simulation code must be in the same folder as the graph code.
 
+## Future Developments
+
+Currently the program runs only in a symmetric or US-style lane changing system. In the near future I plan to create a version of the program that runs in an anti-symmetric or UK-style lane changing system. MOBIL [2] has provision for this as an extension to the symmetric system.
+
 ## Video of Simulation Running
 
 You can download and view a video of the 3 lane siumulation playing by clicking [here](https://github.com/M1lesBaker/Traffic_Project/blob/master/0.5%20cars%20per%20second%20generation%20-%203%20lane%20(9mb).mp4) and then downloading the raw file.
