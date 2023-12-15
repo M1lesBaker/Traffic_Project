@@ -2,7 +2,7 @@
 
 
 ## Introduction
-This code was developed to implement both the intelligent driver model, IDM [1] and the model, minimizing.
+This program was developed to implement both the intelligent driver model, IDM [1] and the model, minimizing.
 overall braking induced by lane change (MOBIL) [2] to create a microscopic simulation of
 traffic on multi-lane motorways. The simulation environment features stochastic vehicle
 generation based on real life data from the UK Government to make it as realistic as possible
@@ -11,11 +11,11 @@ it very versatile. In the future this environment will be used to investigate an
 whether two parallel two lane motorways are better or worse for traffic flow than one four
 lane motorway.
 
-## Physics of the Code
+## Physics of the Program
 
 If you are interested in the physical models implemented in this program please [click here](https://github.com/M1lesBaker/Traffic_Project/blob/master/Explanation%20of%20MOBIL%20and%20IDM.pdf) to view an explanation of how they work
 
-## How to View the Code
+## How to View the Program
 The GitHub contains all code used to make the simulation. This guide will explain what each program is and where to find them:
 
 [1 Lane Simulation](https://github.com/M1lesBaker/Traffic_Project/blob/master/Programs/Early%20Days%20Work/1%20Lane%20Simulation/1%20Lane%20Simulation%20Finished.py): 
@@ -29,9 +29,9 @@ Currently the most advanced simulation featuring 3 lanes. This simulation uses s
 
 Each simulation has graphs that can be used to visualise the data exported from them. To do this the simulation code must be in the same folder as the graph code.
 
-## Video of Simulation
+## Video of Simulation Running
 
-You can download and view a video of the siumulation playing by clicking [here](https://github.com/M1lesBaker/Traffic_Project/blob/master/0.5%20cars%20per%20second%20generation%20-%203%20lane%20(9mb).mp4) and then downloading the raw file.
+You can download and view a video of the 3 lane siumulation playing by clicking [here](https://github.com/M1lesBaker/Traffic_Project/blob/master/0.5%20cars%20per%20second%20generation%20-%203%20lane%20(9mb).mp4) and then downloading the raw file.
 
 ## References
 
