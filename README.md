@@ -28,10 +28,12 @@ Currently the most advanced simulation featuring 3 lanes. This simulation uses s
 
 Each simulation has graphs that can be used to visualise the data exported from them. To do this the simulation code must be in the same folder as the graph code.
 
-##References
+## References
 
 [1] Martin Treiber, Ansgar Hennecke, and Dirk Helbing. Congested traffic states in empirical observa-
 tions and microscopic simulations. Phys. Rev. E, 62:1805–1824, Aug 2000
+
 [2] Arne Kesting, Martin Treiber, and Dirk Helbing. General lane-changing model mobil for car-
 following models. Transportation Research Record, 1999(1):86–94, 2007.
+
 [3] 
